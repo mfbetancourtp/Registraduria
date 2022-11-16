@@ -10,25 +10,27 @@ ca = certifi.where()
 ######
 
 def loadConfigFile():
-    with open('database/config.jeson') as f:
+    with open('database/config.json') as f:
         data= json.load(f)
         return data
 
 
 #####
 ##Funcion de conexion 
-#####
+#####c
 
-def dbconnecion():
-    dataconfig= loadConfigFile()
-    try:    
-        ##Conexion atlas
-        client = MongoClient(dataconfig['MONGO_URI_SERVER'], tlsCAFile= ca)
-        ##Conexion local 
-       # client = MongoClient(dataconfig['MONGO_URI_LOCAL'], dataconfig['LOCAL_PORT'])
-        db = client["Cliclo4_Votaciones_domingo"]
 
+######################################
+#       Función de conexión          #
+######################################
+def dbConnection():
+    dataConfig = loadConfigFile()
+    try:
+            #conexión atlas
+            client = MongoClient(dataConfig['MONGO_URI_SERVER'], tlsCAFile = ca)
+            #Conexión local
+           # client = MongoClient(dataConfig['MONGO_URI_LOCAL'], dataConfig['LOCAL_PORT'])
+            db = client["ciclo4_votaciones_domingo"]
     except ConnectionError:
-        print("Error de conexion con la db")
-        return db
-
+            print("Error de conexión con la db")
+    return db
